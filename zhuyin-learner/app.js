@@ -39,10 +39,9 @@ const downloadIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
 const synth = window.speechSynthesis;
 
 function playAudio(text) {
-    if (synth.speaking) {
-        console.error('speechSynthesis.speaking');
-        return;
-    }
+    // Cancel any stuck speech
+    synth.cancel();
+    
     if (text !== '') {
         const utterThis = new SpeechSynthesisUtterance(text);
         utterThis.lang = 'zh-TW'; // Traditional Chinese
