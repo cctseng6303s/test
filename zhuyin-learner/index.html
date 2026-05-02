@@ -13,28 +13,49 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="app-header">
-        <h1>手機</h1>
-        <p>Mobile Phone</p>
-    </header>
-
     <main class="app-main">
-        <div class="group-header">
-            <h2>Group 1</h2>
-            <div class="group-actions">
-                <button id="play-all-btn" class="action-btn" title="Play All">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-circle"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-                    <span>播放整組</span>
-                </button>
-                <button id="download-all-btn" class="action-btn" title="Download All">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                    <span>下載整組</span>
-                </button>
+        <!-- Home View -->
+        <div id="home-view">
+            <header class="app-header home-header">
+                <h1>開始學習</h1>
+                <p>Select a Topic to Learn</p>
+            </header>
+            <div id="topics-grid" class="topics-grid">
+                <!-- Topic cards will be injected here by JS -->
             </div>
         </div>
 
-        <div id="sentence-grid" class="sentence-grid">
-            <!-- Sentences will be injected here by JS -->
+        <!-- Topic View -->
+        <div id="topic-view" style="display: none;">
+            <div class="nav-bar">
+                <button id="back-btn" class="action-btn back-btn" title="Back to Home">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <span>返回首頁 Back</span>
+                </button>
+            </div>
+
+            <header class="app-header" id="topic-header">
+                <h1 id="topic-title">手機</h1>
+                <p id="topic-subtitle">Mobile Phone</p>
+            </header>
+
+            <div class="group-header">
+                <h2>Group 1</h2>
+                <div class="group-actions">
+                    <button id="play-all-btn" class="action-btn" title="Play All">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-circle"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                        <span>播放整組</span>
+                    </button>
+                    <button id="download-all-btn" class="action-btn" title="Download All">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        <span>下載整組</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="sentence-grid" class="sentence-grid">
+                <!-- Sentences will be injected here by JS -->
+            </div>
         </div>
     </main>
 
