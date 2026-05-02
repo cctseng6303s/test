@@ -37,6 +37,17 @@ const downloadIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height=
 
 // Speech Synthesis setup
 const synth = window.speechSynthesis;
+let availableVoices = [];
+
+function loadVoices() {
+    availableVoices = synth.getVoices();
+}
+
+// Voices are loaded asynchronously on many browsers
+loadVoices();
+if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+}
 
 function playAudio(text) {
     // Cancel any stuck speech
@@ -44,7 +55,21 @@ function playAudio(text) {
     
     if (text !== '') {
         const utterThis = new SpeechSynthesisUtterance(text);
-        utterThis.lang = 'zh-TW'; // Traditional Chinese
+        
+        // Try to explicitly find and set a Chinese voice for better mobile compatibility
+        const zhVoice = availableVoices.find(voice => 
+            voice.lang === 'zh-TW' || 
+            voice.lang.includes('zh-TW') || 
+            voice.lang.includes('zh-HK') || 
+            voice.lang.includes('zh-CN') || 
+            voice.lang.includes('zh')
+        );
+        
+        if (zhVoice) {
+            utterThis.voice = zhVoice;
+        }
+        
+        utterThis.lang = 'zh-TW'; // Fallback if no specific voice object found
         utterThis.rate = 0.9; // Slightly slower for learning
         
         utterThis.onerror = function (event) {
@@ -59,6 +84,14 @@ async function playAll() {
     for (const sentence of sentences) {
         await new Promise(resolve => {
             const utterThis = new SpeechSynthesisUtterance(sentence.chinese);
+            
+            const zhVoice = availableVoices.find(voice => 
+                voice.lang === 'zh-TW' || voice.lang.includes('zh-TW') || voice.lang.includes('zh')
+            );
+            if (zhVoice) {
+                utterThis.voice = zhVoice;
+            }
+            
             utterThis.lang = 'zh-TW';
             utterThis.rate = 0.9;
             utterThis.onend = () => {
